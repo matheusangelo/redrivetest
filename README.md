@@ -53,19 +53,6 @@ dotnet run
 ```
 
 A aplicação começará a consumir as mensagens da fila principal, e, ao forçar a exceção, enviará as mensagens para a DLQ após o número de tentativas configurado.
-
-## Estrutura do Projeto
-
-```
-.
-├── terraform/
-│   ├── main.tf
-│   └── variables.tf
-├── src/
-│   └── RedriveTestApp/
-│       ├── Program.cs
-│       └── RedriveProcessor.cs
-└── README.md
 ```
 
 ## Configurações
@@ -86,7 +73,35 @@ redrive_policy = jsonencode({
 
 ---
 
-## Autor
 
-Matheus Angelo  
-Projeto de estudo com foco em AWS, SQS, DLQ e práticas de resiliência em sistemas distribuídos.
+## Comandos Úteis com AWS CLI (LocalStack)
+
+Abaixo estão os principais comandos para interação manual com as filas SQS no LocalStack usando a AWS CLI.
+
+### 📦 Criar Filas SQS via Script (Exemplo)
+
+```bash
+create-sqs
+
+aws sqs list-queues --endpoint-url=http://localhost:4566
+
+# Fila principal
+aws sqs get-queue-url --queue-name='sqs-app' --endpoint-url=http://localhost:4566
+
+# Dead Letter Queue (DLQ)
+aws sqs get-queue-url --queue-name='sqs-dlq-app' --endpoint-url=http://localhost:4566
+
+aws sqs send-message \
+  --queue-url=http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/sqs-app \
+  --message-body='teste mensagem dlq' \
+  --endpoint-url=http://localhost:4566
+
+# Da DLQ
+aws sqs receive-message \
+  --queue-url=http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/sqs-dlq-app \
+  --endpoint-url=http://localhost:4566
+
+# Da fila principal
+aws sqs receive-message \
+  --queue-url=http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/sqs-app \
+  --endpoint-url=http://localhost:4566
