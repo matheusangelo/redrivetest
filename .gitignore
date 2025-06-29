@@ -1,0 +1,85 @@
+########################################
+# .NET
+########################################
+
+## Build results
+bin/
+obj/
+out/
+[Dd]ebug*/
+[Rr]elease*/
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+## Auto-generated files
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+*.ncb
+*.cache
+*.dbmdl
+
+## Visual Studio
+.vscode/
+.vs/
+
+## Others
+*.pdb
+*.mdb
+*.opendb
+*.bak
+
+## ASP.NET
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+########################################
+# Terraform
+########################################
+
+# Terraform state
+*.tfstate
+*.tfstate.*
+*.backup
+
+# Terraform plan
+*.tfplan
+
+# Crash logs
+crash.log
+
+# Sensitive variables
+.terraform/
+.terraform.lock.hcl
+
+# Ignore override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Local .tfvars files (often contain secrets)
+*.tfvars
+*.tfvars.json
+
+########################################
+# System-specific
+########################################
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Linux
+*~
